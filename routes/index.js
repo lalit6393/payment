@@ -1,5 +1,8 @@
 var express = require('express');
+const bodyParser = require('body-parser');
+
 var router = express.Router();
+router.use(bodyParser.json());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,8 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/lalit', (req, res, next) => {
-     console.log(req.body, "req === ", req);
-     res.end(req.body);
+  const payment = req.body.payload.payment.entity;
+  console.log(payment);
+  console.log(req.body, "req === ", req);
+  res.send(req.body);
 });
 
 module.exports = router;
